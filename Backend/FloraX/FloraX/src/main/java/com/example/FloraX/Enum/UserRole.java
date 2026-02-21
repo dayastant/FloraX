@@ -1,6 +1,6 @@
 package com.example.FloraX.Enum;
 
-public enum Role {
+public enum UserRole  {
     ADMIN,
     USER,
     TECHNICIAN

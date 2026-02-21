@@ -1,12 +1,13 @@
 package com.example.FloraX.Repository;
 
 
-import com.example.FloraX.Entity.User;
+
+import com.example.FloraX.Entity.Users;
 import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Optional;
 
-public interface UserRepository extends JpaRepository<User, Long> {
+public interface UserRepository extends JpaRepository<Users, Long> {
 
-    Optional<User> findByEmail(String email);
+    Optional<Users> findByEmail(String email);
 
 }
