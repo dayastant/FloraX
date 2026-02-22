@@ -6,18 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="5e54a863-4514-433f-97cf-9a40980f57dc" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/.idea/Backend.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/.idea/compiler.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/.idea/encodings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/.idea/jarRepositories.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/FloraX/FloraX/src/main/java/com/example/FloraX/Config/ApplicationConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/FloraX/FloraX/src/main/java/com/example/FloraX/Config/ApplicationConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/FloraX/FloraX/src/main/java/com/example/FloraX/Entity/User.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/FloraX/FloraX/src/main/java/com/example/FloraX/Enum/Role.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/FloraX/FloraX/src/main/java/com/example/FloraX/Enum/UserRole.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/FloraX/FloraX/src/main/java/com/example/FloraX/Repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/FloraX/FloraX/src/main/java/com/example/FloraX/Repository/UserRepository.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,10 +22,10 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "customColor": "",
-  "associatedIndex": 1
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 1
+}</component>
   <component name="ProjectId" id="39yrUPjC98n6wTYGVVt4Rs5TJr7" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="1" id="Add" />
@@ -46,14 +34,14 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.FloraXApplication.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "kotlin-language-version-configured": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.FloraXApplication.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
