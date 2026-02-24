@@ -72,4 +72,15 @@ public class DashboardMapper {
                 .build();
     }
 
+    // ✅ NEW — Valve Mapping
+    public ValveDTO toValveDTO(Valves valve) {
+
+        return ValveDTO.builder()
+                .valveId(valve.getValveId())
+                .zoneId(valve.getZone() != null ? valve.getZone().getZoneId() : null)
+                .valveStatus(valve.getValveStatus() != null ? valve.getValveStatus().name() : null)
+                .powerSource(valve.getPowerSource() != null ? valve.getPowerSource().name() : null)
+                .lastActivatedAt(valve.getLastActivatedAt())
+                .build();
+    }
 }
