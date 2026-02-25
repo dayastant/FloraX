@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { Leaf, User, Mail, Phone, Lock, AlertCircle, CheckCircle } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
-  import api from "../api/axios"; // import the axios instance
+import { registerUser } from "../api/authService"; // import the auth service
 
 export default function Register() {
   const [formData, setFormData] = useState({
@@ -53,9 +53,9 @@ const handleSubmit = async (e) => {
 
   try {
     setLoading(true);
-    const response = await api.post("/register", formData); // connect to Spring Boot
+    const response = await registerUser(formData);
     toast.success("Registration successful!");
-    localStorage.setItem("token", response.data.token); // store JWT
+    localStorage.setItem("token", response.token); // store JWT
     navigate("/login");
   } catch (err) {
     console.error(err);
@@ -103,7 +103,7 @@ const handleSubmit = async (e) => {
           <form className="space-y-4" onSubmit={handleSubmit}>
             {/** Name */}
             <InputField
-              label="Full Name"
+              label="Full Name" 
               name="name"
               placeholder="John Doe"
               icon={<User />}

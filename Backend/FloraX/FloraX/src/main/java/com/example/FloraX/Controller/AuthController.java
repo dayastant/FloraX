@@ -1,6 +1,5 @@
 package com.example.FloraX.Controller;
 
-import com.example.FloraX.Dto.*;
 import com.example.FloraX.Dto.Auth.*;
 import com.example.FloraX.Service.AuthService;
 import lombok.RequiredArgsConstructor;
@@ -9,8 +8,8 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/auth")
-@CrossOrigin(origins = "http://localhost:5173")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "http://localhost:5173")
 public class AuthController {
 
     private final AuthService authService;

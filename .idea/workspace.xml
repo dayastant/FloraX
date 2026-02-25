@@ -6,9 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="5e54a863-4514-433f-97cf-9a40980f57dc" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/FloraX/FloraX/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/FloraX/FloraX/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/reactapp/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/reactapp/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/reactapp/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/reactapp/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/FloraX/FloraX/src/main/java/com/example/FloraX/Config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/FloraX/FloraX/src/main/java/com/example/FloraX/Config/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/FloraX/FloraX/src/main/java/com/example/FloraX/Config/WebConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/FloraX/FloraX/src/main/java/com/example/FloraX/Config/WebConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/FloraX/FloraX/src/main/java/com/example/FloraX/Controller/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/FloraX/FloraX/src/main/java/com/example/FloraX/Controller/AuthController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/reactapp/src/api/axios.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/reactapp/src/api/axios.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Frontend/reactapp/src/pages/register.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/reactapp/src/pages/register.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Frontend/reactapp/vite.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/reactapp/vite.config.js" afterDir="false" />
     </list>
