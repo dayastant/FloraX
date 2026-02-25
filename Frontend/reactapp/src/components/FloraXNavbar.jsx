@@ -1,14 +1,28 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Leaf, LayoutDashboard, LogOut, ChevronDown } from "lucide-react";
 import { FaUserCircle } from "react-icons/fa";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 export default function FloraXNavbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem("token"));
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
+
+  // Re-check auth state on every route change (e.g., after login redirect)
+  useEffect(() => {
+    setIsLoggedIn(!!localStorage.getItem("token"));
+  }, [location]);
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    setIsLoggedIn(false);
+    setIsProfileOpen(false);
+    setIsOpen(false);
+    navigate("/");
+  };
 
   const navLinks = [
     { name: "Home", path: "/" },
@@ -61,7 +75,7 @@ export default function FloraXNavbar() {
             ))}
           </div>
 
-          {/* Right Buttons */}
+          {/* Desktop Right Buttons */}
           <div className="hidden md:flex items-center gap-3">
             {!isLoggedIn && (
               <>
@@ -72,7 +86,6 @@ export default function FloraXNavbar() {
                   <FaUserCircle size={18} />
                   Login
                 </Link>
-
                 <Link
                   to="/register"
                   className="flex items-center gap-2 px-5 py-2 rounded-lg bg-gradient-to-r from-green-600 to-green-500 text-white font-semibold shadow-md hover:shadow-lg hover:scale-105 transition-all duration-300"
@@ -102,6 +115,7 @@ export default function FloraXNavbar() {
                     >
                       <Link
                         to="/dashboard"
+                        onClick={() => setIsProfileOpen(false)}
                         className="flex items-center gap-3 w-full px-5 py-3 hover:bg-green-50 transition-colors"
                       >
                         <LayoutDashboard size={18} className="text-green-600" />
@@ -109,7 +123,7 @@ export default function FloraXNavbar() {
                       </Link>
                       <div className="border-t border-green-100"></div>
                       <button
-                        onClick={() => setIsLoggedIn(false)}
+                        onClick={handleLogout}
                         className="flex items-center gap-3 w-full px-5 py-3 text-red-600 hover:bg-red-50 transition-colors"
                       >
                         <LogOut size={18} />
@@ -150,11 +164,10 @@ export default function FloraXNavbar() {
                     key={index}
                     to={link.path}
                     onClick={() => setIsOpen(false)}
-                    className={`px-4 py-3 rounded-lg font-medium transition-all duration-300 ${
-                      isActive(link.path)
-                        ? "bg-green-600 text-white shadow-md"
-                        : "text-gray-700 hover:bg-green-100"
-                    }`}
+                    className={`px-4 py-3 rounded-lg font-medium transition-all duration-300 ${isActive(link.path)
+                      ? "bg-green-600 text-white shadow-md"
+                      : "text-gray-700 hover:bg-green-100"
+                      }`}
                   >
                     {link.name}
                   </Link>
@@ -172,7 +185,6 @@ export default function FloraXNavbar() {
                       <FaUserCircle size={18} />
                       Login
                     </Link>
-
                     <Link
                       to="/register"
                       onClick={() => setIsOpen(false)}
@@ -193,12 +205,8 @@ export default function FloraXNavbar() {
                       <LayoutDashboard size={18} />
                       Dashboard
                     </Link>
-
                     <button
-                      onClick={() => {
-                        setIsLoggedIn(false);
-                        setIsOpen(false);
-                      }}
+                      onClick={handleLogout}
                       className="flex items-center justify-center gap-2 text-red-600 py-3 font-medium hover:bg-red-50 rounded-lg transition-all"
                     >
                       <LogOut size={18} />

@@ -12,11 +12,10 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AlertDTO {
-
     private Long alertId;
-    private String type;
+    private String type; // AlertType enum name
     private String message;
-    private String status;
+    private String status; // AlertStatus enum name
     private LocalDateTime createdAt;
-
+    private String zoneName; // which zone triggered it
 }

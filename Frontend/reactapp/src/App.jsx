@@ -11,6 +11,7 @@ import Register from './pages/register'
 import About from './pages/about'
 import Services from './pages/service'
 import Contact from './pages/contact'
+import UserDashboard from './pages/UserDashboard'
 
 // Scroll to top when route changes
 function ScrollToTop() {
@@ -25,12 +26,12 @@ function ScrollToTop() {
 
 function PublicLayout() {
   return (
-    <div className="min-h-screen bg-gray-50 py-12">
+    <div className="min-h-screen bg-gray-50 pt-12">
       <ScrollToTop />
       <FloraXNavbar />
       <Outlet />
       <Footer />
- 
+
     </div>
   );
 }
@@ -40,20 +41,22 @@ function App() {
 
   return (
     <>
-    <BrowserRouter>
-    <Routes>
-        <Route path="/" element={<PublicLayout />}>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/services" element={<Services />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-        </Route>
-      </Routes>
-    
-    </BrowserRouter>
-      
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<PublicLayout />}>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/services" element={<Services />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+          </Route>
+          {/* Dashboard — outside PublicLayout (has its own sidebar) */}
+          <Route path="/dashboard" element={<UserDashboard />} />
+        </Routes>
+
+      </BrowserRouter>
+
     </>
   )
 }

@@ -1,6 +1,6 @@
 package com.example.FloraX.Service;
 
-import com.example.FloraX.Dto.*;
+
 import com.example.FloraX.Dto.Auth.*;
 
 public interface AuthService {

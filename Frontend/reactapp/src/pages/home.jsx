@@ -181,7 +181,7 @@ export default function Home() {
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10 mt-12 md:mt-16 text-left">
 
-            <motion.div 
+            <motion.div
               whileHover={{ scale: 1.05 }}
               className="bg-white p-6 md:p-8 rounded-2xl shadow-lg"
             >
@@ -192,7 +192,7 @@ export default function Home() {
               </p>
             </motion.div>
 
-            <motion.div 
+            <motion.div
               whileHover={{ scale: 1.05 }}
               className="bg-white p-6 md:p-8 rounded-2xl shadow-lg"
             >
@@ -203,7 +203,7 @@ export default function Home() {
               </p>
             </motion.div>
 
-            <motion.div 
+            <motion.div
               whileHover={{ scale: 1.05 }}
               className="bg-white p-6 md:p-8 rounded-2xl shadow-lg sm:col-span-2 lg:col-span-1"
             >

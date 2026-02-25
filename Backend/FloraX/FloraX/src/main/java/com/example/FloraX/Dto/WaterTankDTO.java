@@ -10,10 +10,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class WaterTankDTO {
-
     private Long tankId;
-    private Double capacity;
-    private Double currentLevel;
-    private String status;
-
+    private Double capacityLiters;
+    private Double currentLevelLiters;
+    private Double fillPercentage; // (currentLevel / capacity) * 100
+    private String status; // FULL, NORMAL, LOW, CRITICAL, EMPTY
 }

@@ -12,11 +12,11 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class IrrigationLogDTO {
-
     private Long logId;
+    private String zoneName;
     private LocalDateTime startTime;
     private LocalDateTime endTime;
     private Double waterVolumeUsed;
-    private String triggerType;
-
+    private String triggerType; // TriggerType enum name
+    private Long durationMinutes; // computed: endTime - startTime
 }

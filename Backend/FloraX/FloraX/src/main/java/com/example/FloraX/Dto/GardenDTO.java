@@ -12,15 +12,13 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class GardenDTO {
-
     private Long gardenId;
     private String gardenName;
     private String location;
     private Double totalArea;
-
+    private int totalZones;
+    private int activeAlerts;
     private List<ZoneDTO> zones;
-    private List<WaterTankDTO> tanks;
-    private List<AlertDTO> activeAlerts;
     private List<IrrigationLogDTO> recentIrrigations;
-
+    private List<AlertDTO> alerts;
 }
