@@ -1,14 +1,14 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "http://localhost:8081/florax/api",
+  baseURL: "http://localhost:8082/florax/api",
   headers: {
     "Content-Type": "application/json",
   },
 });
 
-// ── Request interceptor ────────────────────────────────────────────────────
-// Automatically attaches the JWT token from localStorage to every request.
+
+
 api.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem("token");
@@ -20,9 +20,8 @@ api.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
-// ── Response interceptor ───────────────────────────────────────────────────
-// If a 401 is returned (token expired / invalid), clears the token and
-// redirects to the login page.
+
+
 api.interceptors.response.use(
   (response) => response,
   (error) => {

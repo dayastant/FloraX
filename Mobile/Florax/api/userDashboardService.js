@@ -1,11 +1,25 @@
-
+/**
+ * userDashboardService.js
+ *
+ * Frontend API service for the FloraX User Dashboard.
+ * Maps 1-to-1 with UserDashboardController endpoints.
+ *
+ * Base URL  : http://localhost:8081/florax/api
+ * Auth      : JWT Bearer token auto-attached via axios interceptor
+ * Prefix    : /dashboard
+ *
+ * Usage example:
+ *   import { getMyDashboard, getActiveAlerts } from '../api/userDashboardService';
+ *   const data = await getMyDashboard();
+ */
 
 import api from "./axios";
 
 const BASE = "/dashboard";
 
-
-
+// ══════════════════════════════════════════════════════════════════════════════
+// UTILITY — centralised error extractor
+// ══════════════════════════════════════════════════════════════════════════════
 const extractError = (error) => {
     const msg =
         error?.response?.data?.message ||
