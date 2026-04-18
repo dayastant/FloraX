@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet, ScrollView, ActivityIndicator } from "react-native";
+import { View, Text, StyleSheet, ScrollView, ActivityIndicator, Dimensions, TouchableOpacity } from "react-native";
+import { LineChart } from "react-native-chart-kit"; // Ensure this is installed
 import { getDashboardSummary, getActiveAlerts } from "../../api/userDashboardService";
+import { Ionicons } from '@expo/vector-icons'; // For better iconography
+
+const screenWidth = Dimensions.get("window").width;
 
 export default function DashboardScreen() {
   const [summary, setSummary] = useState<any>(null);
@@ -10,8 +14,7 @@ export default function DashboardScreen() {
   useEffect(() => {
     async function loadData() {
       try {
-        const sum = await getDashboardSummary();
-        const alts = await getActiveAlerts();
+        const [sum, alts] = await Promise.all([getDashboardSummary(), getActiveAlerts()]);
         setSummary(sum || {});
         setAlerts(alts || []);
       } catch (err) {
@@ -24,50 +27,125 @@ export default function DashboardScreen() {
   }, []);
 
   if (loading) {
-    return <View style={styles.center}><ActivityIndicator size="large" color="#10b981" /></View>;
+    return (
+      <View style={styles.center}>
+        <ActivityIndicator size="large" color="#10b981" />
+      </View>
+    );
   }
 
+  // Mock data for the chart - in a real app, fetch this from your API
+  const chartData = {
+    labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+    datasets: [{ data: summary?.weeklyUsage || [20, 45, 28, 80, 99, 43, 50] }]
+  };
+
   return (
-    <ScrollView style={styles.container} contentContainerStyle={styles.content}>
-      <Text style={styles.title}>Dashboard overview</Text>
-      
-      {/* Overview Stats */}
-      <View style={styles.cardContainer}>
-        <View style={styles.card}>
-          <Text style={styles.cardLabel}>Water Today</Text>
-          <Text style={styles.cardValue}>{summary?.waterUsageToday || 0}L</Text>
+    <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
+      <View style={styles.header}>
+        <View>
+          <Text style={styles.greeting}>Hello, Gardener! 👋</Text>
+          <Text style={styles.title}>System Overview</Text>
         </View>
-        <View style={styles.card}>
-          <Text style={styles.cardLabel}>Total Zones</Text>
-          <Text style={styles.cardValue}>{summary?.totalZones || 0}</Text>
+        <TouchableOpacity style={styles.profileBadge}>
+          <Ionicons name="notifications-outline" size={24} color="#1f2937" />
+        </TouchableOpacity>
+      </View>
+
+      {/* Hero Stats */}
+      <View style={styles.heroCard}>
+        <View>
+          <Text style={styles.heroLabel}>Water Usage Today</Text>
+          <Text style={styles.heroValue}>{summary?.waterUsageToday || 0}L</Text>
+        </View>
+        <View style={styles.progressCircle}>
+           <Text style={styles.progressText}>85%</Text>
         </View>
       </View>
 
+      {/* Chart Section */}
+      <View style={styles.chartContainer}>
+        <Text style={styles.sectionTitle}>Weekly Consumption</Text>
+        <LineChart
+          data={chartData}
+          width={screenWidth - 40}
+          height={200}
+          chartConfig={chartConfig}
+          bezier
+          style={styles.chartStyle}
+        />
+      </View>
+
+      <View style={styles.cardRow}>
+        <StatCard label="Active Zones" value={summary?.totalZones || 0} icon="leaf-outline" color="#3b82f6" />
+        <StatCard label="Avg Temp" value="24°C" icon="thermometer-outline" color="#f59e0b" />
+      </View>
+
       {/* Alerts summary */}
-      <Text style={styles.sectionTitle}>Active Alerts ({alerts?.length || 0})</Text>
-      {alerts?.length > 0 ? (
-        alerts.map((a, i) => (
-          <View key={i} style={styles.alertCard}>
-            <Text style={{ color: "#b91c1c", fontWeight: "600" }}>{a.message || "Alert details"}</Text>
+      <View style={styles.alertSection}>
+        <Text style={styles.sectionTitle}>System Alerts ({alerts?.length || 0})</Text>
+        {alerts?.length > 0 ? (
+          alerts.map((a, i) => (
+            <View key={i} style={styles.alertCard}>
+              <Ionicons name="alert-circle" size={20} color="#b91c1c" />
+              <Text style={styles.alertText}>{a.message || "Potential leak detected in Zone 2"}</Text>
+            </View>
+          ))
+        ) : (
+          <View style={styles.emptyState}>
+            <Ionicons name="checkmark-circle" size={40} color="#10b981" />
+            <Text style={styles.noData}>All systems nominal. Your garden is thriving!</Text>
           </View>
-        ))
-      ) : (
-        <Text style={styles.noData}>No active alerts. Your garden is doing great!</Text>
-      )}
+        )}
+      </View>
     </ScrollView>
   );
 }
 
+// Sub-component for small cards
+const StatCard = ({ label, value, icon, color }: any) => (
+  <View style={styles.smallCard}>
+    <Ionicons name={icon} size={20} color={color} />
+    <Text style={styles.smallCardValue}>{value}</Text>
+    <Text style={styles.smallCardLabel}>{label}</Text>
+  </View>
+);
+
+const chartConfig = {
+  backgroundGradientFrom: "#ffffff",
+  backgroundGradientTo: "#ffffff",
+  decimalPlaces: 0,
+  color: (opacity = 1) => `rgba(16, 185, 129, ${opacity})`,
+  labelColor: (opacity = 1) => `rgba(107, 114, 128, ${opacity})`,
+  propsForDots: { r: "4", strokeWidth: "2", stroke: "#10b981" }
+};
+
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: "#f3f4f6" },
-  content: { padding: 20, paddingTop: 60 },
+  container: { flex: 1, backgroundColor: "#f9fafb" },
+  header: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingHorizontal: 20, paddingTop: 60, marginBottom: 20 },
+  greeting: { fontSize: 14, color: "#6b7280", fontWeight: "500" },
+  title: { fontSize: 26, fontWeight: "bold", color: "#1f2937" },
+  profileBadge: { backgroundColor: "#fff", padding: 10, borderRadius: 12, elevation: 2 },
+  
+  heroCard: { backgroundColor: "#10b981", marginHorizontal: 20, padding: 25, borderRadius: 24, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', elevation: 4 },
+  heroLabel: { color: "#d1fae5", fontSize: 16 },
+  heroValue: { color: "#fff", fontSize: 36, fontWeight: "bold" },
+  progressCircle: { width: 60, height: 60, borderRadius: 30, borderWidth: 4, borderColor: "#d1fae5", justifyContent: 'center', alignItems: 'center' },
+  progressText: { color: "#fff", fontWeight: "bold" },
+
+  chartContainer: { marginTop: 25, paddingHorizontal: 20 },
+  chartStyle: { borderRadius: 16, marginTop: 10 },
+  
+  sectionTitle: { fontSize: 18, fontWeight: "700", color: "#374151", marginBottom: 10 },
+  cardRow: { flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: 20, marginTop: 20 },
+  smallCard: { backgroundColor: "#fff", width: '47%', padding: 15, borderRadius: 16, elevation: 1 },
+  smallCardValue: { fontSize: 20, fontWeight: "bold", color: "#1f2937", marginTop: 8 },
+  smallCardLabel: { fontSize: 12, color: "#6b7280" },
+
+  alertSection: { padding: 20, marginBottom: 30 },
+  alertCard: { backgroundColor: "#fee2e2", padding: 15, borderRadius: 12, flexDirection: 'row', alignItems: 'center', marginBottom: 10 },
+  alertText: { color: "#b91c1c", fontWeight: "600", marginLeft: 10 },
+  emptyState: { alignItems: 'center', marginTop: 10 },
+  noData: { color: "#6b7280", marginTop: 10, textAlign: 'center' },
   center: { flex: 1, justifyContent: "center", alignItems: "center" },
-  title: { fontSize: 28, fontWeight: "bold", color: "#1f2937", marginBottom: 20 },
-  sectionTitle: { fontSize: 18, fontWeight: "600", color: "#374151", marginVertical: 15 },
-  cardContainer: { flexDirection: "row", justifyContent: "space-between" },
-  card: { backgroundColor: "#fff", padding: 20, borderRadius: 12, flex: 0.48, elevation: 2, shadowColor: "#000", shadowOpacity: 0.05, shadowOffset: { width: 0, height: 2 } },
-  cardLabel: { fontSize: 14, color: "#6b7280", marginBottom: 5 },
-  cardValue: { fontSize: 24, fontWeight: "bold", color: "#10b981" },
-  alertCard: { backgroundColor: "#fee2e2", padding: 15, borderRadius: 8, marginBottom: 10, borderWidth: 1, borderColor: "#fecaca" },
-  noData: { color: "#6b7280", fontStyle: "italic", marginTop: 5 },
 });
