@@ -1,18 +1,18 @@
-import React, { useState } from "react";
-import { 
-  View, 
-  Text, 
-  TextInput, 
-  TouchableOpacity, 
-  ScrollView, 
-  StyleSheet, 
-  KeyboardAvoidingView, 
-  Platform,
-  Alert
-} from "react-native";
 import { Feather } from "@expo/vector-icons";
-import { Link, useRouter } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { Link, useRouter } from "expo-router";
+import React, { useState } from "react";
+import {
+  Alert,
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View
+} from "react-native";
 import { registerUser } from "../../api/authService"; // Import from authService
 
 export default function Register() {
@@ -186,23 +186,6 @@ export default function Register() {
           </View>
 
           {/* Role selector */}
-          <View style={styles.inputGroup}>
-            <Text style={styles.label}>Account Type</Text>
-            <View style={styles.roleContainer}>
-              <TouchableOpacity 
-                style={[styles.roleButton, formData.role === "USER" && styles.roleButtonActive]}
-                onPress={() => handleChange("role", "USER")}
-              >
-                <Text style={[styles.roleButtonText, formData.role === "USER" && styles.roleButtonTextActive]}>User</Text>
-              </TouchableOpacity>
-              <TouchableOpacity 
-                style={[styles.roleButton, formData.role === "ADMIN" && styles.roleButtonActive]}
-                onPress={() => handleChange("role", "ADMIN")}
-              >
-                <Text style={[styles.roleButtonText, formData.role === "ADMIN" && styles.roleButtonTextActive]}>Admin</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
 
           {/* Terms checkbox */}
           <TouchableOpacity 

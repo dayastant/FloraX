@@ -1,8 +1,8 @@
-import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import axios from "axios";
 
 const api = axios.create({
-  baseURL: "http://192.168.8.194:8082/florax/api",
+  baseURL: "http://172.19.80.98:8082/florax/api",
   headers: {
     "Content-Type": "application/json",
   },
@@ -12,7 +12,8 @@ api.interceptors.request.use(
   async (config) => {
     try {
       const token = await AsyncStorage.getItem("token");
-      if (token) {
+      const isAuthRoute = config.url?.startsWith("/auth");
+      if (token && !isAuthRoute) {
         config.headers.Authorization = `Bearer ${token}`;
       }
     } catch (e) {
