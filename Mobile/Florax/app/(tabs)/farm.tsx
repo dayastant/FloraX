@@ -10,10 +10,13 @@ import {
   RefreshControl,
   TouchableOpacity
 } from "react-native";
-import { getAllZones, getFaultySensors } from "../../api/userDashboardService";
+import { useRouter } from "expo-router";
+import { Feather } from "@expo/vector-icons";
+import { getAllGardens, getFaultySensors } from "../../api/userDashboardService";
 
 export default function FarmScreen() {
-  const [zones, setZones] = useState<any[]>([]);
+  const router = useRouter();
+  const [gardens, setGardens] = useState<any[]>([]);
   const [faulty, setFaulty] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
@@ -21,11 +24,11 @@ export default function FarmScreen() {
   const fetchFarmData = useCallback(async () => {
     try {
       // Fetching both datasets in parallel for better performance
-      const [zonesData, faultyData] = await Promise.all([
-        getAllZones(),
+      const [gardensData, faultyData] = await Promise.all([
+        getAllGardens(),
         getFaultySensors()
       ]);
-      setZones(zonesData || []);
+      setGardens(gardensData || []);
       setFaulty(faultyData || []);
     } catch (err) {
       console.error("Error fetching farm data:", err);
@@ -42,6 +45,16 @@ export default function FarmScreen() {
   const onRefresh = () => {
     setRefreshing(true);
     fetchFarmData();
+  };
+
+  const handleGardenPress = (garden: any) => {
+    router.push({
+      pathname: "/zones",
+      params: {
+        gardenId: garden.id,
+        gardenName: garden.name
+      }
+    });
   };
 
   if (loading) {
@@ -64,51 +77,85 @@ export default function FarmScreen() {
       >
         <Text style={styles.headerTitle}>Farm Overview</Text>
 
-        {/* Zones Section */}
+        {/* Gardens Section */}
         <View style={styles.sectionHeader}>
-          <Text style={styles.sectionTitle}>Irrigation Zones</Text>
+          <Text style={styles.sectionTitle}>Gardens</Text>
           <View style={styles.badgeCount}>
-            <Text style={styles.badgeCountText}>{zones.length}</Text>
+            <Text style={styles.badgeCountText}>{gardens.length}</Text>
           </View>
         </View>
 
-        {zones.length === 0 ? (
+        {gardens.length === 0 ? (
           <View style={styles.emptyCard}>
-            <Text style={styles.noData}>No zones configured.</Text>
+            <Text style={styles.noData}>No gardens configured.</Text>
           </View>
         ) : (
-          zones.map((z, i) => (
-            <TouchableOpacity key={i} style={styles.card} activeOpacity={0.7}>
+          gardens.map((garden, i) => (
+            <TouchableOpacity
+              key={i}
+              style={styles.card}
+              onPress={() => handleGardenPress(garden)}
+              activeOpacity={0.7}
+            >
               <View style={styles.cardHeader}>
                 <View>
-                  <Text style={styles.cardTitle}>{z.name || `Zone ${z.id}`}</Text>
-                  <Text style={styles.cardSubtitle}>Hardware ID: {z.id}</Text>
+                  <Text style={styles.cardTitle}>{garden.name || `Garden ${garden.id}`}</Text>
+                  <Text style={styles.cardSubtitle}>
+                    {garden.zones?.length || 0} zones • ID: {garden.id}
+                  </Text>
                 </View>
                 <View style={[
                   styles.statusPill,
-                  { backgroundColor: z.status === 'ACTIVE' ? '#dcfce7' : '#f3f4f6' }
+                  { backgroundColor: garden.zones?.some((z: any) => z.status === 'ACTIVE') ? '#dcfce7' : '#f3f4f6' }
                 ]}>
                   <View style={[
                     styles.dot,
-                    { backgroundColor: z.status === 'ACTIVE' ? '#22c55e' : '#94a3b8' }
+                    { backgroundColor: garden.zones?.some((z: any) => z.status === 'ACTIVE') ? '#22c55e' : '#94a3b8' }
                   ]} />
                   <Text style={[
                     styles.statusText,
-                    { color: z.status === 'ACTIVE' ? '#166534' : '#64748b' }
+                    { color: garden.zones?.some((z: any) => z.status === 'ACTIVE') ? '#166534' : '#64748b' }
                   ]}>
-                    {z.status || 'IDLE'}
+                    {garden.zones?.some((z: any) => z.status === 'ACTIVE') ? 'ACTIVE' : 'IDLE'}
                   </Text>
                 </View>
               </View>
 
               <View style={styles.moistureContainer}>
                 <View style={styles.moistureLabelRow}>
-                  <Text style={styles.moistureLabel}>Soil Moisture</Text>
-                  <Text style={styles.moistureValue}>{z.currentMoisture}%</Text>
+                  <Text style={styles.moistureLabel}>Avg Soil Moisture</Text>
+                  <Text style={styles.moistureValue}>
+                    {garden.zones && garden.zones.length > 0
+                      ? Math.round(
+                          garden.zones.reduce((sum: number, z: any) => sum + (z.currentMoisture || 0), 0) /
+                            garden.zones.length
+                        )
+                      : 0}
+                    %
+                  </Text>
                 </View>
                 <View style={styles.progressTrack}>
-                  <View style={[styles.progressFill, { width: `${z.currentMoisture}%` }]} />
+                  <View
+                    style={[
+                      styles.progressFill,
+                      {
+                        width: `${
+                          garden.zones && garden.zones.length > 0
+                            ? Math.round(
+                                garden.zones.reduce((sum: number, z: any) => sum + (z.currentMoisture || 0), 0) /
+                                  garden.zones.length
+                              )
+                            : 0
+                        }%`
+                      }
+                    ]}
+                  />
                 </View>
+              </View>
+
+              <View style={styles.tapIndicator}>
+                <Text style={styles.tapText}>Tap to view zones</Text>
+                <Feather name="arrow-right" size={16} color="#10b981" />
               </View>
             </TouchableOpacity>
           ))
@@ -183,6 +230,9 @@ const styles = StyleSheet.create({
   moistureValue: { fontSize: 18, fontWeight: '800', color: '#3b82f6' },
   progressTrack: { height: 8, backgroundColor: '#eff6ff', borderRadius: 4, overflow: 'hidden' },
   progressFill: { height: '100%', backgroundColor: '#3b82f6', borderRadius: 4 },
+
+  tapIndicator: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginTop: 12, paddingTop: 12, borderTopWidth: 1, borderTopColor: '#f1f5f9' },
+  tapText: { fontSize: 12, fontWeight: '600', color: '#94a3b8' },
 
   faultyCard: { flexDirection: 'row', alignItems: 'center', borderLeftWidth: 6, borderLeftColor: "#ef4444" },
   alertIcon: { width: 32, height: 32, borderRadius: 16, backgroundColor: '#fee2e2', justifyContent: 'center', alignItems: 'center', marginRight: 12 },

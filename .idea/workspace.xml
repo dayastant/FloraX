@@ -5,11 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5e54a863-4514-433f-97cf-9a40980f57dc" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/material_theme_project_new.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/material_theme_project_new.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/FloraX/FloraX/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/FloraX/FloraX/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/FloraX/FloraX/src/main/java/com/example/FloraX/Controller/UserDashboardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/FloraX/FloraX/src/main/java/com/example/FloraX/Controller/UserDashboardController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/FloraX/FloraX/src/main/java/com/example/FloraX/Dto/SensorDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/FloraX/FloraX/src/main/java/com/example/FloraX/Dto/SensorDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/FloraX/FloraX/src/main/java/com/example/FloraX/Dto/ValveDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/FloraX/FloraX/src/main/java/com/example/FloraX/Dto/ValveDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/FloraX/FloraX/src/main/java/com/example/FloraX/Dto/ZoneDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/FloraX/FloraX/src/main/java/com/example/FloraX/Dto/ZoneDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/FloraX/FloraX/src/main/java/com/example/FloraX/FloraXApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/FloraX/FloraX/src/main/java/com/example/FloraX/FloraXApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/FloraX/FloraX/src/main/java/com/example/FloraX/Mapper/DashboardMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/FloraX/FloraX/src/main/java/com/example/FloraX/Mapper/DashboardMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/FloraX/FloraX/src/main/java/com/example/FloraX/Repository/ValvesRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/FloraX/FloraX/src/main/java/com/example/FloraX/Repository/ValvesRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/FloraX/FloraX/src/main/java/com/example/FloraX/Service/Impl/UserDashboardServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/FloraX/FloraX/src/main/java/com/example/FloraX/Service/Impl/UserDashboardServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/FloraX/FloraX/src/main/java/com/example/FloraX/Service/UserDashboardService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/FloraX/FloraX/src/main/java/com/example/FloraX/Service/UserDashboardService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Mobile/Florax/api/axios.js" beforeDir="false" afterPath="$PROJECT_DIR$/Mobile/Florax/api/axios.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Mobile/Florax/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Mobile/Florax/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mobile/Florax/api/userDashboardService.js" beforeDir="false" afterPath="$PROJECT_DIR$/Mobile/Florax/api/userDashboardService.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mobile/Florax/app/(tabs)/_layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Mobile/Florax/app/(tabs)/_layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mobile/Florax/app/(tabs)/farm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Mobile/Florax/app/(tabs)/farm.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,19 +48,19 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.FloraXApplication.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/Daya/Documents/FloraX",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.FloraXApplication.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Daya/Documents/FloraX&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;
   }
-}]]></component>
+}</component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -62,5 +71,16 @@
       <updated>1771679168758</updated>
     </task>
     <servers />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Backend/FloraX/FloraX/src/main/java/com/example/FloraX/FloraXApplication.java</url>
+          <line>10</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

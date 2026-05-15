@@ -575,4 +575,67 @@ public class UserDashboardServiceImpl implements UserDashboardService {
                 return valvesRepository.findByUserIdAndStatus(user.getUserId(), ValveStatus.OPEN)
                                 .stream().map(mapper::toValveDTO).collect(Collectors.toList());
         }
+
+        // ══════════════════════════════════════════════════════════════════════════
+        // 10. VALVE CONTROL OPERATIONS
+        // ══════════════════════════════════════════════════════════════════════════
+
+        @Override
+        public ValveDTO openValve(String email, Long valveId) {
+                Users user = resolveUser(email);
+                Valves valve = valvesRepository.findById(valveId)
+                                .orElseThrow(() -> new RuntimeException("Valve not found: " + valveId));
+                
+                // Verify ownership
+                if (!valve.getZone().getGarden().getUser().getUserId().equals(user.getUserId())) {
+                        throw new RuntimeException("Valve " + valveId + " does not belong to user");
+                }
+                
+                valve.setValveStatus(ValveStatus.OPEN);
+                valve.setLastActivatedAt(LocalDateTime.now());
+                valvesRepository.save(valve);
+                
+                return mapper.toValveDTO(valve);
+        }
+
+        @Override
+        public ValveDTO closeValve(String email, Long valveId) {
+                Users user = resolveUser(email);
+                Valves valve = valvesRepository.findById(valveId)
+                                .orElseThrow(() -> new RuntimeException("Valve not found: " + valveId));
+                
+                // Verify ownership
+                if (!valve.getZone().getGarden().getUser().getUserId().equals(user.getUserId())) {
+                        throw new RuntimeException("Valve " + valveId + " does not belong to user");
+                }
+                
+                valve.setValveStatus(ValveStatus.CLOSED);
+                valvesRepository.save(valve);
+                
+                return mapper.toValveDTO(valve);
+        }
+
+        @Override
+        public ValveDTO toggleValve(String email, Long valveId) {
+                Users user = resolveUser(email);
+                Valves valve = valvesRepository.findById(valveId)
+                                .orElseThrow(() -> new RuntimeException("Valve not found: " + valveId));
+                
+                // Verify ownership
+                if (!valve.getZone().getGarden().getUser().getUserId().equals(user.getUserId())) {
+                        throw new RuntimeException("Valve " + valveId + " does not belong to user");
+                }
+                
+                ValveStatus newStatus = valve.getValveStatus() == ValveStatus.OPEN 
+                        ? ValveStatus.CLOSED 
+                        : ValveStatus.OPEN;
+                
+                valve.setValveStatus(newStatus);
+                if (newStatus == ValveStatus.OPEN) {
+                        valve.setLastActivatedAt(LocalDateTime.now());
+                }
+                valvesRepository.save(valve);
+                
+                return mapper.toValveDTO(valve);
+        }
 }

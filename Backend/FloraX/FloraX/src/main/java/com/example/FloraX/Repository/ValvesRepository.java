@@ -14,6 +14,9 @@ public interface ValvesRepository extends JpaRepository<Valves, Long> {
 
     List<Valves> findByZone_ZoneId(Long zoneId);
 
+    // All valves for a garden
+    List<Valves> findByZone_Garden_GardenId(Long gardenId);
+
     // All valves for a user across all zones
     @Query("SELECT v FROM Valves v WHERE v.zone.garden.user.userId = :userId")
     List<Valves> findAllByUserId(@Param("userId") Long userId);

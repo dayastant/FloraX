@@ -13,8 +13,11 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class ValveDTO {
     private Long valveId;
+    private Long zoneId;
     private String zoneName;
-    private String valveStatus; // OPEN, CLOSED, FAULTY
+    private String status; // OPEN, CLOSED, FAULTY
     private String powerSource; // ELECTRIC, SOLAR, MANUAL
     private LocalDateTime lastActivatedAt;
+    private String lastActivatedAtFormatted; // human-readable format
+    private Boolean isActive; // true if OPEN, false if CLOSED
 }

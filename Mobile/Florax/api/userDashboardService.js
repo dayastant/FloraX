@@ -558,3 +558,55 @@ export const getOpenValves = async () => {
         extractError(error);
     }
 };
+
+// ══════════════════════════════════════════════════════════════════════════════
+// 10. VALVE CONTROL OPERATIONS
+// ══════════════════════════════════════════════════════════════════════════════
+
+/**
+ * PUT /dashboard/valves/{valveId}/open
+ * Opens a specific valve to start irrigation.
+ *
+ * @param {number} valveId
+ * @returns {Promise<ValveDTO>}
+ */
+export const openValve = async (valveId) => {
+    try {
+        const res = await api.put(`${BASE}/valves/${valveId}/open`);
+        return res.data;
+    } catch (error) {
+        extractError(error);
+    }
+};
+
+/**
+ * PUT /dashboard/valves/{valveId}/close
+ * Closes a specific valve to stop irrigation.
+ *
+ * @param {number} valveId
+ * @returns {Promise<ValveDTO>}
+ */
+export const closeValve = async (valveId) => {
+    try {
+        const res = await api.put(`${BASE}/valves/${valveId}/close`);
+        return res.data;
+    } catch (error) {
+        extractError(error);
+    }
+};
+
+/**
+ * PUT /dashboard/valves/{valveId}/toggle
+ * Toggles a valve's state (open if closed, closed if open).
+ *
+ * @param {number} valveId
+ * @returns {Promise<ValveDTO>}
+ */
+export const toggleValve = async (valveId) => {
+    try {
+        const res = await api.put(`${BASE}/valves/${valveId}/toggle`);
+        return res.data;
+    } catch (error) {
+        extractError(error);
+    }
+};

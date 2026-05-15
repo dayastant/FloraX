@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 @Builder
@@ -13,10 +14,12 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class SensorDTO {
     private Long sensorId;
-    private String sensorType; // MOISTURE, TEMPERATURE, etc.
+    private String sensorType; // MOISTURE, TEMPERATURE, HUMIDITY, etc.
     private String serialNumber;
     private String status; // ACTIVE, INACTIVE, FAULTY
     private LocalDate installationDate;
-    private Double latestReading; // most recent sensor value
-    private String recordedAt; // when the reading was taken
+    private Double latestReading; // converted percentage value (0-100 for moisture)
+    private Double latestReadingRaw; // raw ADC value
+    private LocalDateTime recordedAt; // when the reading was taken
+    private String recordedAtFormatted; // human-readable format
 }

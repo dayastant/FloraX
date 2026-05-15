@@ -30,6 +30,22 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
+        name="zones"
+        options={{
+          title: "Zones",
+          tabBarIcon: ({ color }) => <Feather name="grid" size={24} color={color} />,
+          href: null, // Hide from tab bar, accessed via navigation only
+        }}
+      />
+      <Tabs.Screen
+        name="valves"
+        options={{
+          title: "Valves",
+          tabBarIcon: ({ color }) => <Feather name="lock" size={24} color={color} />,
+          href: null, // Hide from tab bar, accessed via navigation only
+        }}
+      />
+      <Tabs.Screen
         name="irrigation"
         options={{
           title: "Irrigation",

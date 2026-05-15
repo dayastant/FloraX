@@ -28,11 +28,11 @@ public class DashboardMapper {
                 .zoneName(zone.getZoneName())
                 .plantType(zone.getPlantType())
                 .soilType(zone.getSoilType())
-                .moistureMin(zone.getMoistureThresholdMin())
-                .moistureMax(zone.getMoistureThresholdMax())
-                .latestMoistureReading(latestReading)
+                .moistureThresholdMin(zone.getMoistureThresholdMin())
+                .moistureThresholdMax(zone.getMoistureThresholdMax())
+                .currentMoisture(latestReading)
                 .irrigationStatus(status)
-                .lastIrrigated(lastIrrigated)
+                .lastIrrigatedAt(lastIrrigated)
                 .build();
     }
 
@@ -89,7 +89,8 @@ public class DashboardMapper {
                 .status(sensor.getStatus() != null ? sensor.getStatus().name() : null)
                 .installationDate(sensor.getInstallationDate())
                 .latestReading(latestReading != null ? latestReading.getValue() : null)
-                .recordedAt(latestReading != null && latestReading.getRecordedAt() != null
+                .recordedAt(latestReading != null ? latestReading.getRecordedAt() : null)
+                .recordedAtFormatted(latestReading != null && latestReading.getRecordedAt() != null
                         ? latestReading.getRecordedAt().format(DISPLAY_FMT)
                         : null)
                 .build();
@@ -119,7 +120,7 @@ public class DashboardMapper {
         return ValveDTO.builder()
                 .valveId(valve.getValveId())
                 .zoneName(valve.getZone() != null ? valve.getZone().getZoneName() : "N/A")
-                .valveStatus(valve.getValveStatus() != null ? valve.getValveStatus().name() : null)
+                .status(valve.getValveStatus() != null ? valve.getValveStatus().name() : null)
                 .powerSource(valve.getPowerSource() != null ? valve.getPowerSource().name() : null)
                 .lastActivatedAt(valve.getLastActivatedAt())
                 .build();

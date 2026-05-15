@@ -231,4 +231,25 @@ public interface UserDashboardService {
      * Returns all valves that are currently OPEN (actively irrigating).
      */
     List<ValveDTO> getOpenValves(String email);
+
+    // ══════════════════════════════════════════════════════════════════════════
+    // 10. VALVE CONTROL OPERATIONS
+    // ══════════════════════════════════════════════════════════════════════════
+
+    /**
+     * Opens a specific valve to start irrigation.
+     * Updates the valve status to OPEN and sets lastActivatedAt.
+     */
+    ValveDTO openValve(String email, Long valveId);
+
+    /**
+     * Closes a specific valve to stop irrigation.
+     * Updates the valve status to CLOSED.
+     */
+    ValveDTO closeValve(String email, Long valveId);
+
+    /**
+     * Toggles a valve's state (OPEN if closed, CLOSED if open).
+     */
+    ValveDTO toggleValve(String email, Long valveId);
 }

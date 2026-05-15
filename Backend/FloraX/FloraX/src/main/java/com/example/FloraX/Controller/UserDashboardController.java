@@ -260,4 +260,26 @@ public class UserDashboardController {
     public ResponseEntity<List<ValveDTO>> getOpenValves(Authentication auth) {
         return ResponseEntity.ok(dashboardService.getOpenValves(email(auth)));
     }
+
+    // ══════════════════════════════════════════════════════════════════════════
+    // 10. VALVE CONTROL OPERATIONS
+    // ══════════════════════════════════════════════════════════════════════════
+
+    /** PUT /api/dashboard/valves/{valveId}/open — open a valve */
+    @PutMapping("/valves/{valveId}/open")
+    public ResponseEntity<ValveDTO> openValve(Authentication auth, @PathVariable Long valveId) {
+        return ResponseEntity.ok(dashboardService.openValve(email(auth), valveId));
+    }
+
+    /** PUT /api/dashboard/valves/{valveId}/close — close a valve */
+    @PutMapping("/valves/{valveId}/close")
+    public ResponseEntity<ValveDTO> closeValve(Authentication auth, @PathVariable Long valveId) {
+        return ResponseEntity.ok(dashboardService.closeValve(email(auth), valveId));
+    }
+
+    /** PUT /api/dashboard/valves/{valveId}/toggle — toggle valve state */
+    @PutMapping("/valves/{valveId}/toggle")
+    public ResponseEntity<ValveDTO> toggleValve(Authentication auth, @PathVariable Long valveId) {
+        return ResponseEntity.ok(dashboardService.toggleValve(email(auth), valveId));
+    }
 }
